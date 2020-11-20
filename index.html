@@ -3,47 +3,77 @@
   <head>
     <meta charset="utf-8">
     <title>Boolzap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class="d-flex">
     <div id="root" class="container d-flex">
-      <div class="col menu d-flex">
+      <div id="menu" class="col d-flex">
         <div class="rowUser d-flex">
           <div class="user d-flex">
             <img src="img/avatar_io.jpg" alt="">
             <span>Nome Utente</span>
           </div>
           <ul class="nav-link">
-            <li><i class="fas fa-circle-notch"></i></li>
-            <li><i class="fas fa-comment-alt"></i></li>
-            <li><i class="fas fa-ellipsis-v"></i></li>
+            <li><span><i class="fas fa-circle-notch"></span></i></li>
+            <li><span><i class="fas fa-comment-alt"></span></i></li>
+            <li><span><i class="fas fa-ellipsis-v"></span></i></li>
           </ul>
         </div>
         <div class="rowNotifications d-flex">
           <div class="circle d-flex"><i class="fas fa-bell-slash"></i></div>
-          <div class="strings">
+          <div class="strings d-flex">
             <p>Ricevi notifiche di nuovi messaggi</p>
-            <p>Attiva notifiche desktop</p>
+            <a href="#"><p>Attiva notifiche desktop</p></a>
           </div>
         </div>
         <div class="rowFilter">
           <div class="input">
-            <i class="fas fa-search"></i>
+            <span><i class="fas fa-search"></i></span>
             <input id="inputFilter" type="text" placeholder="Cerca o inizia una nuova chat" value="">
           </div>
         </div>
         <div class="rowContacts">
           <ul>
-            <li v-for="(contact, index) in contacts" class="d-flex">
-              <img :src="contacts[index].imgSrc" alt="">
-              <p>{{ contacts[index].name }}</p>
+            <li @click="active(cIndex)" v-for="(contact, cIndex) in contacts" class="d-flex">
+              <img :src="contacts[cIndex].imgSrc" alt="">
+              <p>{{ contacts[cIndex].name }}</p>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col chat d-flex">
+      <div id="chat" class="col d-flex">
+        <div class="rowDetails d-flex">
+          <div class="contactInfo d-flex">
+            <img src="img/avatar_3.jpg" alt="">
+            <div class="info d-flex">
+              <p>Samuele</p>
+              <span>Ultimo accesso oggi alle</span>
+            </div>
+          </div>
+          <ul>
+            <li><span><i class="fas fa-search"></i></span></li>
+            <li><span><i class="fas fa-paperclip"></i></span></li>
+            <li><span><i class="fas fa-ellipsis-v"></i></span></li>
+          </ul>
+        </div>
+        <div class="rowMainChat">
+
+        </div>
+        <div class="rowInputText d-flex">
+          <div class="emoticon d-flex">
+            <span><i class="far fa-smile"></i></span>
+          </div>
+          <div class="sendMessage d-flex">
+            <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio">
+          </div>
+          <div class="audio d-flex">
+            <span><i class="fas fa-microphone"></i></span>
+          </div>
+        </div>
 
       </div>
     </div>

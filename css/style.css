@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
 }
 
 body{
@@ -21,7 +22,6 @@ body{
 }
 
 .container .col{
-  border: 1px solid black;
   height: 96vh;
   flex-direction: column;
 }
@@ -29,17 +29,24 @@ body{
   width: 100%;
 }
 
+.active{
+  background-color: green;
+}
+
+
 /* Column Menu */
 
-.col.menu{
+#menu{
   width: 35%;
+  background-color: white;
 }
 
 .rowUser{
-  height: 80px;
+  height: 70px;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: #eaeaea;
+  border-right: 1px solid #E0D8D0;
 }
 
 .user{
@@ -50,45 +57,131 @@ body{
 img{
   border-radius: 50%;
   height: 50px;
+  margin: 10px 15px;
 }
 
 .rowNotifications{
-  background-color: grey;
+  background-color: #8edafc;
+}
+
+.strings{
+  flex-direction: column;
+  justify-content: center;
+}
+
+.strings a, .info span{
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.rowFilter{
+  background-color: #fafafa;
 }
 
 .rowFilter > div{
-  border: 1px solid black;
   padding: 5px;
   background-color: white;
+  margin: 6px 10px;
 }
+
+.input > span{
+  padding: 0 15px;
+}
+
 
 #inputFilter {
   outline: none;
   border: none;
-  width:70%
+  width:80%;
 }
 
 .circle {
+  margin: 10px 15px;
   height: 50px;
   width: 50px;
   background-color: white;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
+  color: #8edafc;
+  font-size: 1.3rem;
 }
 
-.col.menu .rowUser ul li{
+.col .rowUser ul li, .rowDetails ul li{
   display: inline-block;
+  color: #b1b1b1;
+  padding-right: 12px;
+}
+
+.rowContacts{
+  overflow-y: scroll;
 }
 
 .rowContacts ul li{
   list-style-type: none;
   background-color: white;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #E0D8D0;
+}
+
+.rowContacts ul li:last-of-type{
+  border-bottom: none;
+}
+
+.rowContacts ul li > p{
+ margin-top: 10px;
 }
 
 /* Column Chat */
 
-.col.chat{
+#chat{
   width: 65%;
+}
+
+.rowDetails{
+  height: 70px;
+  background-color: #eaeaea;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info{
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rowMainChat{
+  height: calc(100% - 140px);
+  background: url('../img/mine.jpg');
+  overflow-y: scroll;
+}
+
+.rowInputText{
+  height: 70px;
+  background-color: #f3eeea;
+}
+
+.emoticon, .audio{
+  flex-basis: 15%;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+}
+
+.sendMessage{
+  flex-basis: 70%;
+  align-items: center;
+}
+
+#inputSendMessage{
+ width: 100%;
+ padding: 15px;
+ height: 50px;
+ outline: none;
+ border: none;
+ border-radius: 5px;
+}
+
+::placeholder{
+  color: #E0D8D0;
 }
