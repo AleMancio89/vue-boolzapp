@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class="d-flex">
-    <div id="app" class="container d-flex">
+    <div id="root" class="container d-flex">
       <div class="col menu d-flex">
         <div class="rowUser d-flex">
           <div class="user d-flex">
@@ -21,14 +21,26 @@
             <li><i class="fas fa-ellipsis-v"></i></li>
           </ul>
         </div>
-        <div class="rowNotifications">
-          Inserire Avviso Notifica
+        <div class="rowNotifications d-flex">
+          <div class="circle d-flex"><i class="fas fa-bell-slash"></i></div>
+          <div class="strings">
+            <p>Ricevi notifiche di nuovi messaggi</p>
+            <p>Attiva notifiche desktop</p>
+          </div>
         </div>
         <div class="rowFilter">
-          Inserire Input Filtro
+          <div class="input">
+            <i class="fas fa-search"></i>
+            <input id="inputFilter" type="text" placeholder="Cerca o inizia una nuova chat" value="">
+          </div>
         </div>
         <div class="rowContacts">
-          Inserire Lista contatti
+          <ul>
+            <li v-for="(contact, index) in contacts" class="d-flex">
+              <img :src="contacts[index].imgSrc" alt="">
+              <p>{{ contacts[index].name }}</p>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="col chat d-flex">
