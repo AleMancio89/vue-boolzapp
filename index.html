@@ -44,7 +44,7 @@
         <!-- Contact list -->
         <div class="rowContacts">
           <ul>
-            <li @click="active(cIndex)" v-for="(contact, cIndex) in contacts" class="d-flex">
+            <li @click="active(cIndex)" v-for="(contact, cIndex) in contacts" :class="{active: cIndex == activeContactIndex}" class="d-flex">
               <img :src="contacts[cIndex].imgSrc" alt="">
               <p>{{ contacts[cIndex].name }}</p>
             </li>

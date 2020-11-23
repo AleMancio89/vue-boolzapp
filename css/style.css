@@ -110,7 +110,6 @@ img{
 
 .rowContacts ul li{
   list-style-type: none;
-  background-color: white;
   border-bottom: 1px solid #E0D8D0;
 }
 
@@ -120,16 +119,17 @@ img{
   opacity: 0.9
 }
 
+.active{
+  background-color: #eaeaea;
+  opacity: 0.9
+}
+
 .rowContacts ul li:last-of-type{
   border-bottom: none;
 }
 
 .rowContacts ul li > p{
  margin-top: 10px;
-}
-
-.active{
-  background-color: green;
 }
 
 /* Column Chat */
