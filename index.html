@@ -70,7 +70,13 @@
         </div>
         <!-- Main chat window -->
         <div class="rowMainChat">
+          <ul class="d-flex">
+            <li v-for="(message, messIndex) in contacts[activeContactIndex].message" :class="{sent: contacts[activeContactIndex].message[messIndex].sent}" class="message d-flex">
+              <p>{{ message.text }}</p>
+              <p>{{ message.date }}</p>
+            </li>
 
+          </ul>
         </div>
         <!-- Input message, emoticons and voice messages -->
         <div class="rowInputText d-flex">
