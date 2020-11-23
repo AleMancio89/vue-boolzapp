@@ -17,8 +17,7 @@ body{
 }
 
 .container{
-  min-width: 900px;
-  width: 80vw;
+  flex: 0 1 1200px;
 }
 
 .container .col{
@@ -29,20 +28,14 @@ body{
   width: 100%;
 }
 
-.active{
-  background-color: green;
-}
-
-
 /* Column Menu */
 
-#menu{
-  width: 35%;
+#sidebar{
   background-color: white;
+  flex: 0 0 350px;
 }
 
 .rowUser{
-  height: 70px;
   justify-content: space-between;
   align-items: center;
   background-color: #eaeaea;
@@ -51,7 +44,6 @@ body{
 
 .user{
   align-items: center;
-  height: 70px;
 }
 
 img{
@@ -88,7 +80,6 @@ img{
   padding: 0 15px;
 }
 
-
 #inputFilter {
   outline: none;
   border: none;
@@ -114,13 +105,19 @@ img{
 }
 
 .rowContacts{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .rowContacts ul li{
   list-style-type: none;
   background-color: white;
   border-bottom: 1px solid #E0D8D0;
+}
+
+.rowContacts ul li:hover{
+  background-color: #eaeaea;
+  cursor: pointer;
+  opacity: 0.9
 }
 
 .rowContacts ul li:last-of-type{
@@ -131,14 +128,19 @@ img{
  margin-top: 10px;
 }
 
+.active{
+  background-color: green;
+}
+
 /* Column Chat */
 
 #chat{
-  width: 65%;
+  /* width: 65%;
+  flex-shrink: 0; */
+  flex: 1 1 850px;
 }
 
 .rowDetails{
-  height: 70px;
   background-color: #eaeaea;
   justify-content: space-between;
   align-items: center;
@@ -152,7 +154,7 @@ img{
 .rowMainChat{
   height: calc(100% - 140px);
   background: url('../img/mine.jpg');
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .rowInputText{
@@ -182,6 +184,6 @@ img{
  border-radius: 5px;
 }
 
-::placeholder{
+::placeholder, .input > span{
   color: #E0D8D0;
 }

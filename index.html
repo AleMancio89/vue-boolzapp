@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Boolzap</title>
+    <title>Boolzapp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
@@ -11,11 +12,13 @@
   </head>
   <body class="d-flex">
     <div id="root" class="container d-flex">
-      <div id="menu" class="col d-flex">
+      <!-- Sidebar with different element -->
+      <div id="sidebar" class="col d-flex">
+        <!-- Username and list icons menu -->
         <div class="rowUser d-flex">
           <div class="user d-flex">
-            <img src="img/avatar_io.jpg" alt="">
-            <span>Nome Utente</span>
+            <img :src="loggedUser.imgSrc" alt="">
+            <span>{{ loggedUser.name }}</span>
           </div>
           <ul class="nav-link">
             <li><span><i class="fas fa-circle-notch"></span></i></li>
@@ -23,6 +26,7 @@
             <li><span><i class="fas fa-ellipsis-v"></span></i></li>
           </ul>
         </div>
+        <!-- Notifications active/deactive -->
         <div class="rowNotifications d-flex">
           <div class="circle d-flex"><i class="fas fa-bell-slash"></i></div>
           <div class="strings d-flex">
@@ -30,12 +34,14 @@
             <a href="#"><p>Attiva notifiche desktop</p></a>
           </div>
         </div>
+        <!-- Filter search -->
         <div class="rowFilter">
           <div class="input">
             <span><i class="fas fa-search"></i></span>
             <input id="inputFilter" type="text" placeholder="Cerca o inizia una nuova chat" value="">
           </div>
         </div>
+        <!-- Contact list -->
         <div class="rowContacts">
           <ul>
             <li @click="active(cIndex)" v-for="(contact, cIndex) in contacts" class="d-flex">
@@ -45,13 +51,15 @@
           </ul>
         </div>
       </div>
+      <!-- Principal chat section -->
       <div id="chat" class="col d-flex">
+        <!-- Active contact and list icon menu -->
         <div class="rowDetails d-flex">
           <div class="contactInfo d-flex">
-            <img src="img/avatar_3.jpg" alt="">
+            <img :src="contacts[activeContactIndex].imgSrc" alt="">
             <div class="info d-flex">
-              <p>Samuele</p>
-              <span>Ultimo accesso oggi alle</span>
+              <p>{{ contacts[activeContactIndex].name }}</p>
+              <span>Ultimo accesso oggi alle {{ contacts[activeContactIndex].lastSeen }}</span>
             </div>
           </div>
           <ul>
@@ -60,9 +68,11 @@
             <li><span><i class="fas fa-ellipsis-v"></i></span></li>
           </ul>
         </div>
+        <!-- Main chat window -->
         <div class="rowMainChat">
 
         </div>
+        <!-- Input message, emoticons and voice messages -->
         <div class="rowInputText d-flex">
           <div class="emoticon d-flex">
             <span><i class="far fa-smile"></i></span>
