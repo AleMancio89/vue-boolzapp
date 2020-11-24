@@ -21,9 +21,9 @@
             <span>{{ loggedUser.name }}</span>
           </div>
           <ul class="nav-link">
-            <li><span><i class="fas fa-circle-notch"></span></i></li>
-            <li><span><i class="fas fa-comment-alt"></span></i></li>
-            <li><span><i class="fas fa-ellipsis-v"></span></i></li>
+            <li><span><i class="fas fa-circle-notch"></i></span></li>
+            <li><span><i class="fas fa-comment-alt"></i></span></li>
+            <li><span><i class="fas fa-ellipsis-v"></i></span></li>
           </ul>
         </div>
         <!-- Notifications active/deactive -->
@@ -38,15 +38,15 @@
         <div class="rowFilter">
           <div class="input">
             <span><i class="fas fa-search"></i></span>
-            <input id="inputFilter" type="text" placeholder="Cerca o inizia una nuova chat" value="">
+            <input id="inputFilter" v-model="filterInput" type="text" placeholder="Cerca o inizia una nuova chat" value="">
           </div>
         </div>
         <!-- Contact list -->
         <div class="rowContacts">
           <ul>
-            <li @click="active(cIndex)" v-for="(contact, cIndex) in contacts" :class="{active: cIndex == activeContactIndex}" class="d-flex">
-              <img :src="contacts[cIndex].imgSrc" alt="">
-              <p>{{ contacts[cIndex].name }}</p>
+            <li @click="activeContact(contactIndex)" v-for="(contact, contactIndex) in filteredContacts" :class="{active: contactIndex == activeContactIndex}" class="d-flex">
+              <img :src="contact.imgSrc" alt="">
+              <p>{{ contact.name }}</p>
             </li>
           </ul>
         </div>
@@ -73,9 +73,8 @@
           <ul class="d-flex">
             <li v-for="(message, messIndex) in contacts[activeContactIndex].message" :class="{sent: contacts[activeContactIndex].message[messIndex].sent}" class="message d-flex">
               <p>{{ message.text }}</p>
-              <p>{{ message.date }}</p>
+              <p>{{ message.date | formatDate }}</p>
             </li>
-
           </ul>
         </div>
         <!-- Input message, emoticons and voice messages -->
@@ -84,7 +83,7 @@
             <span><i class="far fa-smile"></i></span>
           </div>
           <div class="sendMessage d-flex">
-            <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio">
+            <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio" v-model="inputUserMessage" @keyup.enter="sendMessage(activeContactIndex)">
           </div>
           <div class="audio d-flex">
             <span><i class="fas fa-microphone"></i></span>
