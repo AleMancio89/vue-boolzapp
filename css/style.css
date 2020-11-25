@@ -144,7 +144,6 @@ img{
 
 .active{
   background-color: #eaeaea;
-  opacity: 1
 }
 
 .rowContacts ul li:last-of-type{
@@ -155,10 +154,6 @@ img{
  margin-top: 10px;
 }
 
-.last-message:last-child{
-
-
-}
 /* Column Chat */
 
 #chat{
