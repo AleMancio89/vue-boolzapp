@@ -1,3 +1,7 @@
+/*
+Create your version of WhatsApp by Boolean
+*/
+
 const app = new Vue({
   el : "#root",
   data: {
@@ -9,7 +13,7 @@ const app = new Vue({
       {
         name: "Michele",
         imgSrc: "img/avatar_1.jpg",
-        lastSeen:'13:23',
+        lastSeen:new Date(2020, 10 , 23 , 13 , 23 , 00),
         message: [
           // sent = true means message sent from the loggedUser to the contact
           {
@@ -37,7 +41,7 @@ const app = new Vue({
       {
         name: "Fabio",
         imgSrc: "img/avatar_2.jpg",
-        lastSeen:'16:46',
+        lastSeen:new Date(2020, 10 , 23 , 16 , 46 , 00),
         message: [
           {
             text: "Ale ho bisogno del tuo aiuto",
@@ -69,7 +73,7 @@ const app = new Vue({
       {
         name: "Samuele",
         imgSrc: "img/avatar_3.jpg",
-        lastSeen:'8:40',
+        lastSeen:new Date(2020, 10 , 23 , 8 , 40 , 00),
         message:[
           {
             text: "Ciao, è ancora disponibile la stanza in affitto?",
@@ -96,7 +100,7 @@ const app = new Vue({
       {
         name: "Luisa",
         imgSrc: "img/avatar_8.jpg",
-        lastSeen:'15:15',
+        lastSeen:new Date(2020, 10 , 23 , 15 , 15 , 00),
         message: [
           {
             text: "Dobbiamo parlare.",
@@ -108,7 +112,7 @@ const app = new Vue({
       {
         name: "Alessio",
         imgSrc: "img/avatar_4.jpg",
-        lastSeen:'11:17',
+        lastSeen:new Date(2020, 10 , 23 , 11 , 17 , 00),
         message: [
           {
             text: "Stasera tieniti pronto che andiamo al pub a vedere la partita",
@@ -130,7 +134,7 @@ const app = new Vue({
       {
         name: "Pierpaolo",
         imgSrc: "img/avatar_5.jpg",
-        lastSeen:'19:35',
+        lastSeen:new Date(2020, 10 , 23 , 19 , 35 , 00),
         message: [
           {
             text: "Ho trovato il modo di dare una svolta alla tua vita",
@@ -157,7 +161,7 @@ const app = new Vue({
       {
         name: "Mariassunta",
         imgSrc: "img/avatar_6.jpg",
-        lastSeen:'9:00',
+        lastSeen:new Date(2020, 10 , 23 , 9 , 00 , 00),
         message: [
           {
             text: "Scusa, sono appena arrivata a lavoro",
@@ -179,7 +183,7 @@ const app = new Vue({
       {
         name: "Pietro",
         imgSrc: "img/avatar_7.jpg",
-        lastSeen:'18:06',
+        lastSeen:new Date(2020, 10 , 23 , 18 , 06 , 00),
         message: [
           {
             text: "Stasera calcetto alle 21:00",
@@ -205,8 +209,12 @@ const app = new Vue({
       },
     ],
     inputUserMessage: "",
-    activeContactIndex: 0,
+    activeContact: null,
     filterInput: ""
+  },
+  // Initialize first contact like activeContact after the istance has been created
+  created: function(){
+    this.activeContact = this.contacts[0];
   },
   filters: {
     //Format date in a useful type and return a different way if today message
@@ -214,40 +222,39 @@ const app = new Vue({
       let date = `${inputDate.getUTCDate()}/${inputDate.getUTCMonth() + 1}/${inputDate.getUTCFullYear()}`;
       let hours = inputDate.getUTCHours();
       let minutes = (inputDate.getUTCMinutes() < 10 ? '0' : '') + inputDate.getUTCMinutes();
-      let seconds = (inputDate.getUTCSeconds() < 10 ? '0' : '') + inputDate.getUTCSeconds();
 
       if ((inputDate.getUTCDate()) == (new Date().getUTCDate())) {
         return `${hours + 1}:${minutes}`;
       } else {
-        return `${date} ${hours + 1}:${minutes}:${seconds}`;
+        return `${date} ${hours + 1}:${minutes}`;
       }
     }
   },
   methods: {
     //Define active contact
-    activeContact(actIndex) {
-      this.activeContactIndex = [actIndex];
+    activatedContact(contact) {
+      this.activeContact = contact;
     },
-    //Set automatic reply
+    //Set automatic reply with lastSeen refresh
     automaticReply() {
-      this.contacts[this.activeContactIndex].message.push(
+      this.activeContact.message.push(
         {
           text: "Scusami ora non posso rispondere, sentiamoci più tardi",
           sent: false,
           date: new Date()
         }
       )
+      this.activeContact.lastSeen = new Date();
     },
     //Handle input message from user and setInterval for automatic reply after 3seconds
-    sendMessage(activeContactIndex) {
-      this.contacts[activeContactIndex].message.push(
+    sendMessage() {
+      this.activeContact.message.push(
         {
         text: this.inputUserMessage,
         sent: true,
         date: new Date()
-        // date: `${new Date().getUTCDay()}/${new Date().getUTCMonth()}/${new Date().getUTCFullYear()} ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}:${new Date().getUTCSeconds()}`
         },
-      )
+      );
       this.inputUserMessage = '';
       setTimeout(this.automaticReply, 3000);
     },

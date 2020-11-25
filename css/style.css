@@ -33,6 +33,7 @@ body{
 #sidebar{
   background-color: white;
   flex: 0 0 350px;
+  max-width: 350px
 }
 
 .rowUser{
@@ -106,6 +107,7 @@ img{
 
 .rowContacts{
   overflow-y: auto;
+  overflow-x: hidden
 }
 
 .rowContacts ul li{
@@ -119,9 +121,30 @@ img{
   opacity: 0.9
 }
 
+.rowContacts .last-message{
+  color: grey;
+  font-size: 0.9rem
+}
+
+.contact-info{
+  flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.last-message .check{
+  color: #8edafc;
+  margin-right: 4px;
+}
+
+.last-message:last-child{
+  margin-top: 5px;
+
+}
+
 .active{
   background-color: #eaeaea;
-  opacity: 0.9
+  opacity: 1
 }
 
 .rowContacts ul li:last-of-type{
@@ -132,11 +155,13 @@ img{
  margin-top: 10px;
 }
 
+.last-message:last-child{
+
+
+}
 /* Column Chat */
 
 #chat{
-  /* width: 65%;
-  flex-shrink: 0; */
   flex: 1 1 850px;
 }
 
@@ -166,7 +191,7 @@ img{
   width: 280px;
   border-radius: 10px;
   margin: 5px 0px;
-  padding: 15px;
+  padding: 8px;
   flex-direction: column;
   background-color: white;
 }
@@ -184,6 +209,7 @@ img{
   font-size: 0.6rem;
   color: grey;
   align-self: flex-end;
+  margin-top: 5px;
 }
 
 .rowInputText{

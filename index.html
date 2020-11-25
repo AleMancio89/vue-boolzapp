@@ -44,9 +44,15 @@
         <!-- Contact list -->
         <div class="rowContacts">
           <ul>
-            <li @click="activeContact(contactIndex)" v-for="(contact, contactIndex) in filteredContacts" :class="{active: contactIndex == activeContactIndex}" class="d-flex">
+            <li @click="activatedContact(contact)" v-for="contact in filteredContacts" :class="{active: contact === activeContact}" class="d-flex">
               <img :src="contact.imgSrc" alt="">
-              <p>{{ contact.name }}</p>
+              <div class="contact-info d-flex">
+                <p>{{ contact.name }}</p>
+                <div class="last-message d-flex">
+                  <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18"><path fill="currentColor" d="M17.394 5.035l-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-.427-.388a.381.381 0 0 0-.578.038l-.451.576a.497.497 0 0 0 .043.645l1.575 1.51a.38.38 0 0 0 .577-.039l7.483-9.602a.436.436 0 0 0-.076-.609zm-4.892 0l-.57-.444a.434.434 0 0 0-.609.076l-6.39 8.198a.38.38 0 0 1-.577.039l-2.614-2.556a.435.435 0 0 0-.614.007l-.505.516a.435.435 0 0 0 .007.614l3.887 3.8a.38.38 0 0 0 .577-.039l7.483-9.602a.435.435 0 0 0-.075-.609z"></path></svg>
+                  <p>{{ contact.message[contact.message.length - 1].text }}</p>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -56,10 +62,10 @@
         <!-- Active contact and list icon menu -->
         <div class="rowDetails d-flex">
           <div class="contactInfo d-flex">
-            <img :src="contacts[activeContactIndex].imgSrc" alt="">
+            <img :src="activeContact.imgSrc" alt="">
             <div class="info d-flex">
-              <p>{{ contacts[activeContactIndex].name }}</p>
-              <span>Ultimo accesso oggi alle {{ contacts[activeContactIndex].lastSeen }}</span>
+              <p>{{ activeContact.name }}</p>
+              <span>Ultimo accesso {{ activeContact.lastSeen | formatDate }}</span>
             </div>
           </div>
           <ul>
@@ -71,7 +77,7 @@
         <!-- Main chat window -->
         <div class="rowMainChat">
           <ul class="d-flex">
-            <li v-for="(message, messIndex) in contacts[activeContactIndex].message" :class="{sent: contacts[activeContactIndex].message[messIndex].sent}" class="message d-flex">
+            <li v-for="(message, messIndex) in activeContact.message" :class="{sent: activeContact.message[messIndex].sent}" class="message d-flex">
               <p>{{ message.text }}</p>
               <p>{{ message.date | formatDate }}</p>
             </li>
@@ -83,7 +89,7 @@
             <span><i class="far fa-smile"></i></span>
           </div>
           <div class="sendMessage d-flex">
-            <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio" v-model="inputUserMessage" @keyup.enter="sendMessage(activeContactIndex)">
+            <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio" v-model="inputUserMessage" @keyup.enter="sendMessage">
           </div>
           <div class="audio d-flex">
             <span><i class="fas fa-microphone"></i></span>
