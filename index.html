@@ -79,6 +79,7 @@
           <ul class="d-flex">
             <li v-for="(message, messIndex) in activeContact.message" :class="{sent: activeContact.message[messIndex].sent}" class="message d-flex">
               <p>{{ message.text }}</p>
+              <span id="chevron"><i class="fas fa-chevron-down"></i></span>
               <p>{{ message.date | formatDate }}</p>
             </li>
           </ul>

@@ -1,5 +1,5 @@
 /*
-Create your version of WhatsApp by Boolean
+Create your version of WhatsApp by Boolean using Vue.js
 */
 
 const app = new Vue({
@@ -235,17 +235,6 @@ const app = new Vue({
     activatedContact(contact) {
       this.activeContact = contact;
     },
-    //Set automatic reply with lastSeen refresh
-    automaticReply() {
-      this.activeContact.message.push(
-        {
-          text: "Scusami ora non posso rispondere, sentiamoci più tardi",
-          sent: false,
-          date: new Date()
-        }
-      )
-      this.activeContact.lastSeen = new Date();
-    },
     //Handle input message from user and setInterval for automatic reply after 3seconds
     sendMessage() {
       this.activeContact.message.push(
@@ -256,7 +245,27 @@ const app = new Vue({
         },
       );
       this.inputUserMessage = '';
-      setTimeout(this.automaticReply, 3000);
+      this.autoscroll();
+      //Automatic response after 3 sec
+      let answerUser = this.activeContact;
+      setTimeout(() => {
+        answerUser.message.push(
+              {
+                text: "Scusami ora non posso rispondere, sentiamoci più tardi",
+                sent: false,
+                date: new Date()
+              }
+            )
+        answerUser.lastSeen = new Date();
+        this.autoscroll();
+      }, 3000);
+    },
+    //Autoscroll to the end after next DOM update cycle
+    autoscroll() {
+       this.$nextTick(function(){
+          let windowChat = document.getElementsByClassName('rowMainChat')[0];
+          windowChat.scrollTop = windowChat.scrollHeight;
+        });
     },
   },
   computed:{
