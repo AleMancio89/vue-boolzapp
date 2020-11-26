@@ -13,7 +13,7 @@ const app = new Vue({
       {
         name: "Michele",
         imgSrc: "img/avatar_1.jpg",
-        lastSeen:new Date(2020, 10 , 23 , 13 , 23 , 00),
+        lastSeen: new Date(),
         message: [
           // sent = true means message sent from the loggedUser to the contact
           {
@@ -263,7 +263,7 @@ const app = new Vue({
     //Autoscroll to the end after next DOM update cycle
     autoscroll() {
        this.$nextTick(function(){
-          let windowChat = document.getElementsByClassName('rowMainChat')[0];
+          let windowChat = document.getElementsByClass('mainChat')[0];
           windowChat.scrollTop = windowChat.scrollHeight;
         });
     },

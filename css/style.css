@@ -107,7 +107,7 @@ img{
 
 .rowContacts{
   overflow-y: auto;
-  overflow-x: hidden
+  overflow-x: hidden;
 }
 
 .rowContacts ul li{
@@ -129,17 +129,22 @@ img{
 .contact-info{
   flex-direction: column;
   justify-content: center;
+}
+
+.last-message{
+  margin-top: 5px;
+}
+
+.last-message p {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 240px;
 }
 
 .last-message .check{
   color: #8edafc;
   margin-right: 4px;
-}
-
-.last-message:last-child{
-  margin-top: 5px;
-
 }
 
 .active{
@@ -210,8 +215,6 @@ img{
   display:flex;
   background-color: inherit;
 }
-
-
 
 .message.sent{
   background-color: #D5F9BA;

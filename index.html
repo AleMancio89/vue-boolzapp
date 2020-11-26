@@ -45,7 +45,9 @@
         <div class="rowContacts">
           <ul>
             <li @click="activatedContact(contact)" v-for="contact in filteredContacts" :class="{active: contact === activeContact}" class="d-flex">
-              <img :src="contact.imgSrc" alt="">
+              <div class="contact-photo">
+                <img :src="contact.imgSrc" alt="">
+              </div>
               <div class="contact-info d-flex">
                 <p>{{ contact.name }}</p>
                 <div class="last-message d-flex">
