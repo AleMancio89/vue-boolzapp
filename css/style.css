@@ -163,6 +163,7 @@ img{
 
 #chat{
   flex: 1 1 850px;
+  position: relative;
 }
 
 .rowDetails{
@@ -243,6 +244,55 @@ img{
   justify-content: center;
   align-items: center;
   color: grey;
+}
+
+.emoticonMenu{
+  position: absolute;
+  width: 100%;
+  background-color: #f3eeea;
+  bottom : 70px;
+  font-size: 1.5rem;
+  color: grey;
+  display: none;
+  padding-left: 10px;
+}
+
+.border-bottom{
+  border-bottom: 3px solid #009688;
+}
+
+.head-selection{
+  width: 100%;
+}
+
+.body-section{
+  padding-top: 5px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  max-height: 150px;
+  min-height: 150px;
+  overflow: auto;
+}
+
+.titleEmoticon{
+  padding-top: 5px;
+  padding-bottom: 3px;
+  font-size: 1.1rem;
+}
+
+.emoji{
+  cursor: pointer;
+}
+
+.emoticonMenu .head-selection span {
+  flex-basis: calc(100% / 9);
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.show{
+  display: inline-block;
 }
 
 .sendMessage{

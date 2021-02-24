@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/dataEmoticon.js" charset="utf-8"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class="d-flex">
@@ -86,10 +87,30 @@
             </li>
           </ul>
         </div>
+        <!-- Emoticon menu -->
+        <div class="emoticonMenu" :class="{show: isEmoticonActive}">
+          <div class="head-selection d-flex">
+            <template v-for="(icon, categoryIndex) in emoticonHead">
+               <span class="box d-flex" :class="{'border-bottom' : categoryIndex == emoticonHeadIndex}" @click="emojiHeadSelected(categoryIndex)">
+                 <i :class="icon"></i>
+               </span>
+              </template>
+          </div>
+          <p class="titleEmoticon">{{dataEmoticon[emoticonHeadIndex][0].title}}</p>
+          <div class="body-section d-flex">
+            <template v-for="(emojiList, index) in dataEmoticon[emoticonHeadIndex]">
+              <!-- <p class="titleEmoticon">{{emojiList.title}}</p> -->
+              <div class="emoji" @click="selectEmoji(indexEmoji, emoticonHeadIndex)" v-for="(emoji,indexEmoji) in emojiList.emoji">
+                {{emoji}}
+              </div>
+            </template>
+          </div>
+
+        </div>
         <!-- Input message, emoticons and voice messages -->
         <div class="rowInputText d-flex">
           <div class="emoticon d-flex">
-            <span><i class="far fa-smile"></i></span>
+            <span @click="showEmoticon"><i class="far fa-smile"></i></span>
           </div>
           <div class="sendMessage d-flex">
             <input id="inputSendMessage" type="text" placeholder="Scrivi un messaggio" v-model="inputUserMessage" @keyup.enter="sendMessage">

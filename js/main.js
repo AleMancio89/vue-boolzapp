@@ -13,7 +13,7 @@ const app = new Vue({
       {
         name: "Michele",
         imgSrc: "img/avatar_1.jpg",
-        lastSeen: new Date(),
+        lastSeen: new Date(2020, 10 , 23 , 12 , 00 , 00),
         message: [
           // sent = true means message sent from the loggedUser to the contact
           {
@@ -210,7 +210,66 @@ const app = new Vue({
     ],
     inputUserMessage: "",
     activeContact: null,
-    filterInput: ""
+    filterInput: "",
+    isEmoticonActive: false,
+    emoticonHead: [...emoticonHead],
+    emoticonHeadIndex: 0,
+    dataEmoticon: [
+      [
+          {
+              title: "Recenti",
+              emoji: [...recently]
+          }
+      ],
+      [
+          {
+              title: "Faccine e Persone",
+              emoji: [...smileys, ...people]
+          }
+      ],
+      [
+          {
+              title: "Animali e Natura",
+              emoji: [...animalNature]
+          }
+      ],
+      [
+          {
+              title: "Cibo e Bevande",
+              emoji: [...food]
+          }
+      ],
+      [
+          {
+              title: "Attività",
+              emoji: [...activities]
+          }
+      ],
+      [
+          {
+              title: "Viaggi e Luoghi",
+              emoji: [...travel]
+          }
+      ],
+      [
+          {
+              title: "Oggetti",
+              emoji: [...object]
+          }
+      ],
+      [
+          {
+              title: "Simboli",
+              emoji: [...symbol]
+          }
+      ],
+      [
+          {
+              title: "Vestiti",
+              emoji: [...clothing]
+          }
+      ],
+    ],
   },
   // Initialize first contact like activeContact after the istance has been created
   created: function(){
@@ -263,9 +322,21 @@ const app = new Vue({
     //Autoscroll to the end after next DOM update cycle
     autoscroll() {
        this.$nextTick(function(){
-          let windowChat = document.getElementsByClass('mainChat')[0];
+          let windowChat = document.getElementsByClassName('rowMainChat')[0];
           windowChat.scrollTop = windowChat.scrollHeight;
         });
+    },
+    // Show emoticon Menu
+    showEmoticon() {
+      this.isEmoticonActive = !this.isEmoticonActive;
+    },
+    //Select right category of emoji
+    emojiHeadSelected: function(index) {
+      this.emoticonHeadIndex = index;
+    },
+    //Select emoji and add to the input
+    selectEmoji: function(indexEl, emoticonHeadIndex) {
+      this.inputUserMessage += this.dataEmoticon[emoticonHeadIndex][0].emoji[indexEl];
     },
   },
   computed:{
